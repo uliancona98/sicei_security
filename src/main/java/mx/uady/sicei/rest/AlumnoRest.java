@@ -43,7 +43,7 @@ public class AlumnoRest {
     }
 
     // POST /api/alumnos
-    @PostMapping("/alumnos")
+    /*@PostMapping("/alumnos")
     public ResponseEntity<Alumno> postAlumnos(@RequestBody @Valid AlumnoRequest request) throws URISyntaxException {
         
         // RequestBody le indica a Java que estamos esperando un request que cumpla con los campos del Objeto AlumnoRequest
@@ -55,7 +55,7 @@ public class AlumnoRest {
         return ResponseEntity
             .created(new URI("/alumnos/" + alumno.getId()))
             .body(alumno);
-    }
+    }*/
 
     // GET /api/alumnos/3 -> 200
     // Validar que exista, si no existe Lanzar un RuntimeException

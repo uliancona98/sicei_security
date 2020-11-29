@@ -76,7 +76,6 @@ public class AlumnoSerivce {
     }
 
     public Alumno editarAlumno(Integer id, AlumnoRequest request) {
-
         return alumnoRepository.findById(id)
         .map(alumno -> {
             alumno.setNombre(request.getNombre());

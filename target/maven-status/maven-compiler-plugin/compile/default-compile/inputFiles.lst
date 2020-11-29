@@ -6,7 +6,6 @@ C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\repository\Equi
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\repository\UsuarioRepository.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\repository\TutoriaRepository.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\request\ProfesorRequest.java
-C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\rest\LoginRest.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\service\ProfesorService.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\Usuario.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\rest\JpaResource.java
@@ -22,6 +21,7 @@ C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\request\E
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\Alumno.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\request\AlumnoRequest.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\rest\AlumnoRest.java
+C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\service\JpaService.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\config\TokenFilter.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\exception\NotFoundException.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\request\UsuarioUpdateRequest.java
