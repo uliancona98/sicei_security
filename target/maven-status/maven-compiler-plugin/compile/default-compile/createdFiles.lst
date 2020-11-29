@@ -10,6 +10,7 @@ mx\uady\sicei\model\Tutoria.class
 mx\uady\sicei\service\UsuarioService.class
 mx\uady\sicei\rest\TutoriaRest.class
 mx\uady\sicei\service\EquipoService.class
+mx\uady\sicei\config\TokenFilter.class
 mx\uady\sicei\repository\ProfesorRepository.class
 mx\uady\sicei\model\request\AlumnoUpdateRequest.class
 mx\uady\sicei\model\request\ProfesorRequest.class
@@ -25,7 +26,9 @@ mx\uady\sicei\service\TutoriaService.class
 mx\uady\sicei\model\request\AlumnoRequest.class
 mx\uady\sicei\exception\NotFoundException.class
 mx\uady\sicei\model\Tutoria$TutoriaId.class
+mx\uady\sicei\resource\JpaResource.class
 mx\uady\sicei\model\Equipo.class
 mx\uady\sicei\repository\EquipoRepository.class
 mx\uady\sicei\rest\UsuarioRest.class
 mx\uady\sicei\model\Licenciatura.class
+mx\uady\sicei\config\WebSecurity.class
