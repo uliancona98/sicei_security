@@ -1,0 +1,27 @@
+{
+    /*"java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home",
+    "/Program Files/AdoptOpenJDK/jdk-11.0.8.10-hotspot"
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home",
+            "default": true
+        },
+        {
+            "name": "JavaSE-11",
+            "path": "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home",
+        }
+    ]*/
+    "java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "Program Files/Java/jdk1.8.0_241",
+            "default": true
+        },
+        {
+            "name": "JavaSE-11",
+            "path":"/Program Files/AdoptOpenJDK/jdk-11.0.8.10-hotspot",
+        }
+    ]
+}
