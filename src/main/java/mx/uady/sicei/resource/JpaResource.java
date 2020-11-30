@@ -24,10 +24,10 @@ public class JpaResource {
     @Autowired
     private ProfesorRepository profesorRepository;
 
-    @GetMapping("/login")
-    public ResponseEntity<String> getLogin() {
-        return ResponseEntity.ok("abierto");
-    }
+    // @GetMapping("/login")
+    // public ResponseEntity<String> getLogin() {
+    //     return ResponseEntity.ok("abierto");
+    // }
     @GetMapping("/quienSoy")
     public ResponseEntity<Usuario> getQuienSoy() {
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
