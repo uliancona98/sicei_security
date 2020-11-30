@@ -61,7 +61,7 @@ public class AlumnoSerivce {
             alumno = alumnoRepository.save(alumno); // INSERT
             return alumno;
         }
-        throw new NotFoundException("Alumno");
+        return null;
     }
 
     @Transactional

@@ -6,8 +6,10 @@ C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\repository\Equi
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\repository\UsuarioRepository.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\repository\TutoriaRepository.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\request\ProfesorRequest.java
+C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\rest\LoginRest.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\service\ProfesorService.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\Usuario.java
+C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\service\LoginService.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\rest\JpaResource.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\Tutoria.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\config\WebSecurity.java
@@ -26,6 +28,7 @@ C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\config\TokenFil
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\exception\NotFoundException.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\request\UsuarioUpdateRequest.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\repository\ProfesorRepository.java
+C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\model\request\LoginRequest.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\rest\TutoriaRest.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\repository\AlumnoRepository.java
 C:\xampp\htdocs\sicei\sicei_security\src\main\java\mx\uady\sicei\service\TutoriaService.java

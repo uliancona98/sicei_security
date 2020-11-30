@@ -1,6 +1,7 @@
 mx\uady\sicei\rest\AlumnoRest.class
 mx\uady\sicei\model\Profesor.class
 mx\uady\sicei\repository\AlumnoRepository.class
+mx\uady\sicei\service\LoginService.class
 mx\uady\sicei\model\request\EquipoRequest.class
 mx\uady\sicei\model\request\UsuarioUpdateRequest.class
 mx\uady\sicei\service\JpaService.class
@@ -8,6 +9,7 @@ mx\uady\sicei\SiceiApplication.class
 mx\uady\sicei\rest\ProfesorRest.class
 mx\uady\sicei\model\request\TutoriaRequest.class
 mx\uady\sicei\model\Tutoria.class
+mx\uady\sicei\rest\LoginRest.class
 mx\uady\sicei\service\UsuarioService.class
 mx\uady\sicei\rest\TutoriaRest.class
 mx\uady\sicei\service\EquipoService.class
@@ -16,6 +18,7 @@ mx\uady\sicei\repository\ProfesorRepository.class
 mx\uady\sicei\model\request\AlumnoUpdateRequest.class
 mx\uady\sicei\model\request\ProfesorRequest.class
 mx\uady\sicei\service\ProfesorService.class
+mx\uady\sicei\model\request\LoginRequest.class
 mx\uady\sicei\repository\TutoriaRepository.class
 mx\uady\sicei\model\Alumno.class
 mx\uady\sicei\repository\UsuarioRepository.class

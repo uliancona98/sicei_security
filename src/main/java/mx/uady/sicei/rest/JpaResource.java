@@ -48,11 +48,11 @@ public class JpaResource {
     private UsuarioService usuarioService;
     @Autowired
     private UsuarioRepository usuarioRepository;
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public ResponseEntity<String> getLogin() {
 
         return ResponseEntity.ok("abierto");
-    }
+    }*/
 
     @GetMapping("/quienSoy")
     //devuelve al usuario logeado
@@ -61,19 +61,37 @@ public class JpaResource {
         return ResponseEntity.ok().body(usuario);
     }
 
-    //private Logger log = LoggerFactory.getLogger(JpaResource.class);
-    @GetMapping("/logoutttt")
-    public ResponseEntity<String> logout() {
-        //log.info("bitch");
+    /*@PostMapping("/logout")
+    public String fetchSignoutSite(HttpServletRequest request, HttpServletResponse response) {        
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        usuario.setToken("");
+        usuario.setToken(null);
+        usuarioRepository.save(usuario);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+          
+        return "redirect:/login?logout";
+    }*/
+
+    @PostMapping("/signout")
+    public ResponseEntity<String> logout() {
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        usuario.setToken(null);
         usuarioRepository.save(usuario);
         return ResponseEntity.ok().body("Log out correcto");
     }
 
+    /*@PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        usuario.setToken(null);
+        usuarioRepository.save(usuario);
+        return ResponseEntity.ok().body("Log out correcto");
+    }*/
     @PostMapping("/register")
     //crea un usuario con un nuevo token
-    public ResponseEntity<Alumno> register(@RequestBody @Valid AlumnoRequest request) throws URISyntaxException{
+    public ResponseEntity register(@RequestBody @Valid AlumnoRequest request) throws URISyntaxException{
         //Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //return ResponseEntity.ok().body(usuario);
         Alumno alumno = alumnoService.crearAlumno(request);
@@ -84,7 +102,7 @@ public class JpaResource {
             .created(new URI("/alumnos/" + alumno.getId()))
             .body(alumno);
         }else{
-            throw new NotFoundException("No existe este alumno :v");
+            return ResponseEntity.badRequest().body("Ya existe un usuario con este usuario");        
 
         }
 

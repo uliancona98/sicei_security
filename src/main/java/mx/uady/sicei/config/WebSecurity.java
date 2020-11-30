@@ -25,11 +25,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/login", "/register").permitAll()
                 .anyRequest().authenticated()
-            /*.and()
+            .and()
             .logout()
             .permitAll()
-            .logoutSuccessUrl("/")
-            .logoutUrl("/logout")*/
+            .logoutUrl("/logout")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
             .and()
                 .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
        
