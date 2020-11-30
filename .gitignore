@@ -1,0 +1,6 @@
+target/
+settings.json
+.project
+.settings
+src/main/resources/application.properties
+
