@@ -22,8 +22,6 @@ import mx.uady.sicei.repository.TutoriaRepository;
 import mx.uady.sicei.repository.UsuarioRepository;
 import mx.uady.sicei.repository.EquipoRepository;
 
-import java.util.UUID;
-
 @Service
 public class AlumnoSerivce {
 
@@ -72,7 +70,7 @@ public class AlumnoSerivce {
     public Alumno getAlumno(Integer id) {
 
         return alumnoRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("No existe este alumno :v"));
+            .orElseThrow(() -> new NotFoundException("No existe este alumno"));
     }
 
     public Alumno editarAlumno(Integer id, AlumnoRequest request) {
