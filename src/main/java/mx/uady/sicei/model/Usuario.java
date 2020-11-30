@@ -21,7 +21,6 @@ public class Usuario {
     private String usuario;
 
     @Column
-    @JsonIgnore
     private String token;
 
     @Column

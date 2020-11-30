@@ -43,9 +43,12 @@ public class JpaService {
         alumno.setNombre(request.getNombre());
         alumno.setLicenciatura(request.getLicenciatura());
         alumno.setUsuario(crearUsuario(request)); // Relacionar 2 entidades
-        Equipo equipo = equipoRepository.findById(request.getEquipoId()).get();
-        equipoRepository.save(equipo);
-        alumno.setEquipo(equipo);
+        if(request.getEquipoId() != null){
+            Equipo equipo = equipoRepository.findById(request.getEquipoId()).get();
+            equipoRepository.save(equipo);
+            alumno.setEquipo(equipo);
+        }
+
         alumno = alumnoRepository.save(alumno); // INSERT
         return alumno;
     }

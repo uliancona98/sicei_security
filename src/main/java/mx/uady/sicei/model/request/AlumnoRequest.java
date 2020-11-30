@@ -8,10 +8,20 @@ import javax.validation.constraints.Size;
 import mx.uady.sicei.model.Licenciatura;
 
 public class AlumnoRequest{
-
+    
+    @NotNull
     @NotEmpty
     @Size(min = 3, max = 255)
     private String nombre;
+
+    @NotNull
+    @NotEmpty
+    private String usuario;
+
+    @NotNull
+    @Size(min=8, max=25)
+    @NotEmpty
+    private String password;
 
     @NotNull
     private Licenciatura licenciatura;
@@ -34,6 +44,21 @@ public class AlumnoRequest{
         this.nombre = nombre;
     }
 
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsuario() {
+        return this.usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
     public Integer getEquipoId() {
         return this.equipoId;
     }
