@@ -24,7 +24,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
             .authorizeRequests()
                 .antMatchers("/login", "/register").permitAll()
-                // .anyRequest().authenticated()
+                .anyRequest().authenticated()
             .and()
             .logout()
             .permitAll()

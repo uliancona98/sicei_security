@@ -38,6 +38,6 @@ public class JpaService {
 
     public Alumno getAlumno(Integer id) {
         return alumnoRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("No existe este alumno :v"));
+            .orElseThrow(() -> new NotFoundException("No existe este alumno"));
     }
 }

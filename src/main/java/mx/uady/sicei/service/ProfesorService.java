@@ -43,7 +43,7 @@ public class ProfesorService {
     public Profesor getProfesor(Integer id) {
 
         return profesorRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("No existe ese profesor :v"));
+            .orElseThrow(() -> new NotFoundException("No existe ese profesor"));
     }
 
     public Profesor editarProfesor(Integer id, ProfesorRequest request) {
@@ -54,7 +54,7 @@ public class ProfesorService {
             profesor.setHoras(request.getHoras());
             return profesorRepository.save(profesor);
         })
-        .orElseThrow(() -> new NotFoundException("No existe ese profesor :v"));
+        .orElseThrow(() -> new NotFoundException("No existe ese profesor"));
     }
 
     public String borrarProfesor(Integer id) {
@@ -62,7 +62,7 @@ public class ProfesorService {
         List<Profesor> profesores = new LinkedList<>();
         profesorRepository.findAll().iterator().forEachRemaining(profesores::add);
         if(profesores.size() < id || id <= 0){
-            throw new NotFoundException("No existe ese profesor :v");
+            throw new NotFoundException("No existe ese profesor");
         }
 
         List<Tutoria> tutoriasProfesor = tutoriaRepository.findByProfesorId(id);

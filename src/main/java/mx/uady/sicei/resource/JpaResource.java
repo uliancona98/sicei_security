@@ -45,14 +45,6 @@ public class JpaResource {
     @Autowired
     private AlumnoSerivce alumnoService;
     @Autowired
-<<<<<<< HEAD:src/main/java/mx/uady/sicei/resource/JpaResource.java
-    private ProfesorRepository profesorRepository;
-
-    // @GetMapping("/login")
-    // public ResponseEntity<String> getLogin() {
-    //     return ResponseEntity.ok("abierto");
-    // }
-=======
     private UsuarioService usuarioService;
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -62,7 +54,6 @@ public class JpaResource {
         return ResponseEntity.ok("abierto");
     }*/
 
->>>>>>> final:src/main/java/mx/uady/sicei/rest/JpaResource.java
     @GetMapping("/quienSoy")
     //devuelve al usuario logeado
     public ResponseEntity<Usuario> getQuienSoy() {
