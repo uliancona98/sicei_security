@@ -20,6 +20,4 @@ public class LoginRequest {
     public String getPassword() {
         return this.password;
     }
-
-    
 }

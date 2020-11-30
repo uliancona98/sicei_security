@@ -32,4 +32,8 @@ public class LoginService {
 
         return token;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> final
