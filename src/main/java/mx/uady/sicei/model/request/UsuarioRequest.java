@@ -38,7 +38,14 @@ public class UsuarioRequest{
     }
 
     public String getUsuario() {
-        return usuario;
+        return this.usuario;
     }
 
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return this.token;
+    }
 }

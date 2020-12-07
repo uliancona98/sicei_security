@@ -28,8 +28,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             .and()
             .logout()
             .permitAll()
-            .logoutSuccessUrl("/")
             .logoutUrl("/logout")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
             .and()
                 .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
        

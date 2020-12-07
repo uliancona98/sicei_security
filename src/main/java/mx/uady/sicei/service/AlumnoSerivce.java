@@ -22,8 +22,6 @@ import mx.uady.sicei.repository.TutoriaRepository;
 import mx.uady.sicei.repository.UsuarioRepository;
 import mx.uady.sicei.repository.EquipoRepository;
 
-import java.util.UUID;
-
 @Service
 public class AlumnoSerivce {
 
@@ -44,16 +42,24 @@ public class AlumnoSerivce {
     }
 
     public Alumno crearAlumno(AlumnoRequest request) {
+        //Usuario usuarioExistente = usuarioRepository.findByUsuario(request.getUsuario());
+        Usuario usuarioExistente = usuarioRepository.findByUsuario(request.getUsuario());
         Alumno alumno = new Alumno();
-
-        alumno.setNombre(request.getNombre());
-        alumno.setLicenciatura(request.getLicenciatura());
-        alumno.setUsuario(crearUsuario(request)); // Relacionar 2 entidades
-        Equipo equipo = equipoRepository.findById(request.getEquipoId()).get();
-        equipoRepository.save(equipo);
-        alumno.setEquipo(equipo);
-        alumno = alumnoRepository.save(alumno); // INSERT
-        return alumno;
+        //List<Alumno> alumnosConEquipo = alumnoRepository.findByEquipoId(equipo.get());
+        /*if(alumnosConEquipo.size()>0){
+            return false;
+        }*/
+        if (usuarioExistente==null) {
+            alumno.setNombre(request.getNombre());
+            alumno.setLicenciatura(request.getLicenciatura());
+            alumno.setUsuario(crearUsuario(request)); // Relacionar 2 entidades
+            Equipo equipo = equipoRepository.findById(request.getEquipoId()).get();
+            equipoRepository.save(equipo);
+            alumno.setEquipo(equipo);
+            alumno = alumnoRepository.save(alumno); // INSERT
+            return alumno;
+        }
+        return null;
     }
 
     @Transactional
@@ -64,6 +70,8 @@ public class AlumnoSerivce {
 
         String token = UUID.randomUUID().toString();
         usuario.setToken(token);
+        usuario.setPassword(request.getPassword());
+        usuario.setUsuario(request.getUsuario());
 
         Usuario usuarioGuardado = usuarioRepository.save(usuario);
         return usuarioGuardado;
@@ -72,11 +80,10 @@ public class AlumnoSerivce {
     public Alumno getAlumno(Integer id) {
 
         return alumnoRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("No existe este alumno :v"));
+            .orElseThrow(() -> new NotFoundException("No existe este alumno"));
     }
 
     public Alumno editarAlumno(Integer id, AlumnoRequest request) {
-
         return alumnoRepository.findById(id)
         .map(alumno -> {
             alumno.setNombre(request.getNombre());
