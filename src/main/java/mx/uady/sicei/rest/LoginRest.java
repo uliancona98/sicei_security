@@ -33,14 +33,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
+
 import mx.uady.sicei.exception.NotFoundException;
+
 import mx.uady.sicei.model.Licenciatura;
-import mx.uady.sicei.model.request.AlumnoRequest;
+
 import mx.uady.sicei.service.AlumnoSerivce;
 import mx.uady.sicei.service.UsuarioService;
+
 import mx.uady.sicei.repository.UsuarioRepository;
-import mx.uady.sicei.service.LoginService;
+
+import mx.uady.sicei.config.JwtTokenUtil;
+
 import mx.uady.sicei.model.request.LoginRequest;
+import mx.uady.sicei.model.request.AlumnoRequest;
+import mx.uady.sicei.model.JwtResponse;
 
 
 @RestController
@@ -48,26 +55,28 @@ import mx.uady.sicei.model.request.LoginRequest;
 public class LoginRest {
 
     @Autowired
-    private LoginService loginService;
-    @Autowired
     private AlumnoSerivce alumnoService;
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
     
     // POST /login
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody @Valid LoginRequest request) throws RuntimeException{
 
-        String token = loginService.loginUsuario(request);
+        Usuario usuario = usuarioService.getUsuario(request.getUsuario());
 
-        if (token == null) {
+        if (usuario == null) {
             String errMessage = "El usuario o la contrasena son incorrectos";
             return ResponseEntity.ok(errMessage);
         }
 
-        return ResponseEntity.ok(token);
+        String token = jwtTokenUtil.generateToken(usuario);
+
+        return ResponseEntity.ok(new JwtResponse(token));
     }
 
     @GetMapping("/quienSoy")
