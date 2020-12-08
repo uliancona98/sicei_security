@@ -10,5 +10,4 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
     // SELECT * WHERE Usuario.token = abc
     Usuario findByToken(String token);
     Usuario findByUsuario(String usuario);
-
 }

@@ -23,13 +23,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .httpBasic().disable()
             .authorizeRequests()
-                .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/api/login", "/api/register").permitAll()
                 .anyRequest().authenticated()
-            /*.and()
+            .and()
             .logout()
             .permitAll()
-            .logoutSuccessUrl("/")
-            .logoutUrl("/logout")*/
+            .logoutUrl("/logout")
+            .invalidateHttpSession(true)
+            .deleteCookies("JSESSIONID")
             .and()
                 .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
        

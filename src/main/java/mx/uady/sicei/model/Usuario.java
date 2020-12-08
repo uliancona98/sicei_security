@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,10 +22,10 @@ public class Usuario {
     private String usuario;
 
     @Column
-    private String token;
+    private String password;
 
     @Column
-    private String password;
+    private String token;
     
 
 
@@ -53,17 +54,6 @@ public class Usuario {
         this.usuario = usuario;
     }
 
-
-    public Usuario id(Integer id) {
-        this.id = id;
-        return this;
-    }
-
-    public Usuario usuario(String usuario) {
-        this.usuario = usuario;
-        return this;
-    }
-
     /**
      * @param password the password to set
      */
@@ -78,18 +68,22 @@ public class Usuario {
         return this.password;
     }
 
-    /**
-     * @param token the token to set
-     */
+    public String getToken() {
+        return this.token;
+    }
+
     public void setToken(String token) {
         this.token = token;
     }
 
-    /**
-     * @return the token
-     */
-    public String getToken() {
-        return this.token;
+    public Usuario id(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    public Usuario usuario(String usuario) {
+        this.usuario = usuario;
+        return this;
     }
 
     @Override

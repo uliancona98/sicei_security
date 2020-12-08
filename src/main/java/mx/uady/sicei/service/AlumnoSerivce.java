@@ -22,8 +22,6 @@ import mx.uady.sicei.repository.TutoriaRepository;
 import mx.uady.sicei.repository.UsuarioRepository;
 import mx.uady.sicei.repository.EquipoRepository;
 
-import java.util.UUID;
-
 @Service
 public class AlumnoSerivce {
 
@@ -44,14 +42,11 @@ public class AlumnoSerivce {
     }
 
     public Alumno crearAlumno(AlumnoRequest request) {
-        //Usuario usuarioExistente = usuarioRepository.findByUsuario(request.getUsuario());
+
         Usuario usuarioExistente = usuarioRepository.findByUsuario(request.getUsuario());
         Alumno alumno = new Alumno();
-        //List<Alumno> alumnosConEquipo = alumnoRepository.findByEquipoId(equipo.get());
-        /*if(alumnosConEquipo.size()>0){
-            return false;
-        }*/
-        if (usuarioExistente==null) {
+
+        if (usuarioExistente == null) {
             alumno.setNombre(request.getNombre());
             alumno.setLicenciatura(request.getLicenciatura());
             alumno.setUsuario(crearUsuario(request)); // Relacionar 2 entidades
@@ -61,14 +56,12 @@ public class AlumnoSerivce {
             alumno = alumnoRepository.save(alumno); // INSERT
             return alumno;
         }
-        throw new NotFoundException("Alumno");
+        return null;
     }
 
     @Transactional
     private Usuario crearUsuario(AlumnoRequest request) {
         Usuario usuario = new Usuario();
-        String uuid = UUID.randomUUID().toString();
-        usuario.setPassword(uuid);
 
         String token = UUID.randomUUID().toString();
         usuario.setToken(token);
@@ -82,7 +75,7 @@ public class AlumnoSerivce {
     public Alumno getAlumno(Integer id) {
 
         return alumnoRepository.findById(id)
-            .orElseThrow(() -> new NotFoundException("No existe este alumno :v"));
+            .orElseThrow(() -> new NotFoundException("No existe este alumno"));
     }
 
     public Alumno editarAlumno(Integer id, AlumnoRequest request) {
