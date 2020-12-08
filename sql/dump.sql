@@ -38,7 +38,11 @@ CREATE TABLE `alumnos` (
 
 LOCK TABLES `alumnos` WRITE;
 /*!40000 ALTER TABLE `alumnos` DISABLE KEYS */;
-INSERT INTO `alumnos` VALUES (12,'Juanito Ancona5','LIS',7,45),(13,'Juanito Ancona5','LIS',7,46),(14,'Juanito Ancona5','LIS',7,47),(15,'Ulises Graniel','LIS',7,48),(16,'Juanito Ancona5','LIS',7,49);
+INSERT INTO `alumnos` VALUES 
+(12,'Juanito Ancona5','LIS',7,45),
+(13,'Juanito Ancona5','LIS',7,46),
+(14,'Juanito Ancona5','LIS',7,47),
+(15,'Ulises Graniel','LIS',7,48);
 /*!40000 ALTER TABLE `alumnos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,9 +128,9 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(45) DEFAULT NULL,
+  `usuario` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `token` varchar(45) DEFAULT NULL,
+  `token` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -137,7 +141,11 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (45,'15678900','holitas22','fe2d02ef-6129-40bd-b169-7c987af45e39'),(46,'15678901','holitas22',''),(47,'15678909','holitas22',NULL),(48,'13003862','holitas22','aa40a0d3-5e09-4632-8ff2-318a0b1b1aef'),(49,'15678908','holitas22','13f970e4-09bb-46c4-b60d-6bed4ac0d007'),(50,'carlos@correo.mx','holadenuevo','95499eca-eb94-4570-ae05-3fbc37dcff50');
+INSERT INTO `usuarios` VALUES 
+(45,'15678900','holitas22','fe2d02ef-6129-40bd-b169-7c987af45e39'),
+(46,'13003862','holitas22','aa40a0d3-5e09-4632-8ff2-318a0b1b1aef'),
+(47,'15678908','holitas22','13f970e4-09bb-46c4-b60d-6bed4ac0d007'),
+(48,'carlos@correo.mx','holadenuevo','95499eca-eb94-4570-ae05-3fbc37dcff50');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
