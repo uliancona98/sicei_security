@@ -88,11 +88,12 @@ public class LoginRest {
     }
 
     @PostMapping("/signout")
-    public ResponseEntity<String> logout() {
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public ResponseEntity<Usuario> logout() {
+        /*Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // usuario.setToken(null);
         // usuarioRepository.save(usuario);
-        return ResponseEntity.ok().body("Log out correcto");
+        return ResponseEntity.ok().body("Log out correcto");*/
+         return ResponseEntity.ok(LoginService.logout());
     }
 
     @PostMapping("/register")
