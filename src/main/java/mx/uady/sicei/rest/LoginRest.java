@@ -105,7 +105,8 @@ public class LoginRest {
             .created(new URI("/alumnos/" + alumno.getId()))
             .body(alumno);
         } else {
-            return ResponseEntity.badRequest().body("Ya existe un usuario con este usuario");        
+            //return ResponseEntity.badRequest().body("Ya existe un usuario con este usuario"); 
+             return ResponseEntity.status(HttpStatus.CONFLICT).body(alumno);
         }
     }
 }
