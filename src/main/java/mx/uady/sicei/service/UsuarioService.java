@@ -53,9 +53,9 @@ public class UsuarioService {
     
        public Usuario logout() {
 
-        Usuario foundUser = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(foundUser != null) {
-            return foundUser;
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(usuario != null) {
+            return usuario;
         }
         else {
             throw new NotFoundException();
