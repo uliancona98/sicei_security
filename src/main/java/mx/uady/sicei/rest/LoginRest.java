@@ -22,6 +22,7 @@ import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.repository.AlumnoRepository;
 import mx.uady.sicei.repository.ProfesorRepository;
 import mx.uady.sicei.repository.UsuarioRepository;
+import org.springframework.http.HttpStatus;
 
 import java.net.URI;
 import java.net.URISyntaxException;
