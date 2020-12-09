@@ -35,4 +35,15 @@ public class LoginService {
 
         return jwt;
     }
+    
+     public Usuario logout() {
+
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(usuario != null) {
+            return usuario;
+        }
+        else {
+            throw new NotFoundException();
+        }
+    }
 }
