@@ -20,7 +20,9 @@ import com.google.gson.GsonBuilder;
 import org.apache.commons.codec.binary.Base64;
 
 import mx.uady.sicei.model.Usuario;
+import mx.uady.sicei.model.TokenBlacklist;
 import mx.uady.sicei.repository.UsuarioRepository;
+import mx.uady.sicei.repository.TokenRepository;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -33,6 +35,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
+
+	@Autowired
+	private TokenRepository tokenRepository;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -47,7 +52,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		// only the Token
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 			jwtToken = requestTokenHeader.substring(7);
-			// checar blacklist
+
 			try {
                 token = DecodedToken.getDecoded(jwtToken);
                 username = token.sub;
@@ -56,6 +61,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			} catch (Exception e) {
                 e.printStackTrace();
 				System.out.println("JWT Token has expired");
+			}
+
+			// checar blacklist
+			TokenBlacklist existingToken = tokenRepository.findByToken(requestTokenHeader);
+			logger.warn(existingToken);
+			if (existingToken != null) {
+				logger.warn("JWT token no válido");
+				username = null;
 			}
 		} else {
 			System.out.println(requestTokenHeader);

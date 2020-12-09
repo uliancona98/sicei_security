@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.uady.sicei.model.Usuario;
+import mx.uady.sicei.model.TokenBlacklist;
 import mx.uady.sicei.model.request.LoginRequest;
 import mx.uady.sicei.repository.UsuarioRepository;
+import mx.uady.sicei.repository.TokenRepository;
 import mx.uady.sicei.config.JwtTokenUtil;
 import mx.uady.sicei.exception.NotFoundException;
 
@@ -19,6 +21,8 @@ public class LoginService {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private TokenRepository tokenRepository;
     
     public String loginUsuario(LoginRequest request) {
         Usuario usuario = usuarioRepository.findByUsuario(request.getUsuario());
@@ -39,14 +43,8 @@ public class LoginService {
         return jwt;
     }
     
-     public Usuario logout() {
-
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(usuario != null) {
-            return usuario;
-        }
-        else {
-            throw new NotFoundException();
-        }
+     public void logout(String auth) {
+         TokenBlacklist token = new TokenBlacklist(auth);
+         tokenRepository.save(token);
     }
 }

@@ -29,6 +29,7 @@ import java.net.URISyntaxException;
 
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,12 +93,9 @@ public class LoginRest {
     }
 
     @PostMapping("/signout")
-    public ResponseEntity<Usuario> logout() {
-        /*Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // usuario.setToken(null);
-        // usuarioRepository.save(usuario);
-        return ResponseEntity.ok().body("Log out correcto");*/
-         return ResponseEntity.ok(loginService.logout());
+    public ResponseEntity<JwtResponse> logout(@RequestHeader("Authorization") String auth) {
+        loginService.logout(auth);
+        return ResponseEntity.ok(new JwtResponse(auth));
     }
 
     @PostMapping("/register")
@@ -111,7 +109,6 @@ public class LoginRest {
             .created(new URI("/alumnos/" + alumno.getId()))
             .body(alumno);
         } else {
-            //return ResponseEntity.badRequest().body("Ya existe un usuario con este usuario"); 
              return ResponseEntity.status(HttpStatus.CONFLICT).body(alumno);
         }
     }
