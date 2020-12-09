@@ -16,6 +16,7 @@ import mx.uady.sicei.model.request.UsuarioRequest;
 import mx.uady.sicei.service.UsuarioService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/api")
@@ -46,12 +47,6 @@ public class UsuarioRest {
         return ResponseEntity
             .ok()
             .body(u);
-    }
-    
-        @PostMapping("/logout")
-    public ResponseEntity<Usuario> logout() {
-
-        return ResponseEntity.ok(usuarioService.logout());
     }
     
     //DELETE /api/usuario/3

@@ -9,6 +9,9 @@ import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.model.request.LoginRequest;
 import mx.uady.sicei.repository.UsuarioRepository;
 import mx.uady.sicei.config.JwtTokenUtil;
+import mx.uady.sicei.exception.NotFoundException;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Service
 public class LoginService {

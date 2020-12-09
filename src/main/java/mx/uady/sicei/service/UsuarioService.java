@@ -12,6 +12,8 @@ import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.model.request.UsuarioRequest;
 import mx.uady.sicei.repository.UsuarioRepository;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 @Service
 public class UsuarioService {
 
@@ -50,16 +52,4 @@ public class UsuarioService {
         })
         .orElseThrow(() -> new NotFoundException("No existe ese usuario"));
     }
-    
-       public Usuario logout() {
-
-        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(usuario != null) {
-            return usuario;
-        }
-        else {
-            throw new NotFoundException();
-        }
-    }
-
 }

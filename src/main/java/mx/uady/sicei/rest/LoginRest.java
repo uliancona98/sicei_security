@@ -41,6 +41,7 @@ import mx.uady.sicei.model.Licenciatura;
 
 import mx.uady.sicei.service.AlumnoSerivce;
 import mx.uady.sicei.service.UsuarioService;
+import mx.uady.sicei.service.LoginService;
 
 import mx.uady.sicei.repository.UsuarioRepository;
 
@@ -60,9 +61,12 @@ public class LoginRest {
     @Autowired
     private UsuarioService usuarioService;
     @Autowired
+    private LoginService loginService;
+    @Autowired
     private UsuarioRepository usuarioRepository;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
     
     // POST /login
     @PostMapping("/login")
@@ -93,7 +97,7 @@ public class LoginRest {
         // usuario.setToken(null);
         // usuarioRepository.save(usuario);
         return ResponseEntity.ok().body("Log out correcto");*/
-         return ResponseEntity.ok(LoginService.logout());
+         return ResponseEntity.ok(loginService.logout());
     }
 
     @PostMapping("/register")

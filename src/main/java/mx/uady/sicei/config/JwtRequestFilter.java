@@ -47,8 +47,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		// only the Token
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 			jwtToken = requestTokenHeader.substring(7);
+			// checar blacklist
 			try {
-				//username = getUsernameFromToken(jwtToken).usuario;
                 token = DecodedToken.getDecoded(jwtToken);
                 username = token.sub;
 			} catch (IllegalArgumentException e) {
