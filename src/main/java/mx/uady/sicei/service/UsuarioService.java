@@ -50,5 +50,16 @@ public class UsuarioService {
         })
         .orElseThrow(() -> new NotFoundException("No existe ese usuario"));
     }
+    
+       public Usuario logout() {
+
+        Usuario foundUser = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(foundUser != null) {
+            return foundUser;
+        }
+        else {
+            throw new NotFoundException();
+        }
+    }
 
 }
