@@ -48,6 +48,12 @@ public class UsuarioRest {
             .body(u);
     }
     
+        @PostMapping("/logout")
+    public ResponseEntity<Usuario> logout() {
+
+        return ResponseEntity.ok(usuarioService.logout());
+    }
+    
     //DELETE /api/usuario/3
     /*@DeleteMapping("/usuarios/{id}")
     public ResponseEntity deleteUsuario(@PathVariable Integer id){
