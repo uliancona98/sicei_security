@@ -38,8 +38,8 @@ public class UsuarioService {
         throw new NotFoundException();
     }
 
-    public Usuario getUsuario(String username) {
-        return usuarioRepository.findByUsuario(username);
+    public Usuario getUsuario(String usuario) {
+        return usuarioRepository.findByUsuario(usuario);
     }
 
     public Usuario editarUsuario(Integer id, UsuarioRequest request) {

@@ -12,8 +12,9 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
+
     @Autowired
-    private TokenFilter tokenFilter;
+    private JwtRequestFilter jwtRequestFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -26,13 +27,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/login", "/api/register").permitAll()
                 .anyRequest().authenticated()
             .and()
-            .logout()
-            .permitAll()
-            .logoutUrl("/logout")
-            .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID")
-            .and()
-                .addFilterBefore(tokenFilter, BasicAuthenticationFilter.class);
+                .addFilterBefore(jwtRequestFilter, BasicAuthenticationFilter.class);
        
     }
 

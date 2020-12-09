@@ -22,10 +22,12 @@ public class Usuario {
     private String usuario;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @Column
-    private String token;
+    @JsonIgnore
+    private String secret;
     
 
 
@@ -68,12 +70,12 @@ public class Usuario {
         return this.password;
     }
 
-    public String getToken() {
-        return this.token;
+    public String getSecret() {
+        return this.secret;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 
     public Usuario id(Integer id) {

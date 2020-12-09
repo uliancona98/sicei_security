@@ -65,7 +65,7 @@ public class LoginRest {
     
     // POST /login
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid LoginRequest request) throws RuntimeException{
+    public ResponseEntity<?> login(@RequestBody @Valid LoginRequest request) throws RuntimeException{
 
         Usuario usuario = usuarioService.getUsuario(request.getUsuario());
 
