@@ -11,7 +11,7 @@ public class DecodedToken {
   public String sub;
   public String exp;
   public String iat;
-  public String ext;
+  public String expiracion;
 
 
   public static DecodedToken getDecoded(String encodedToken) throws UnsupportedEncodingException {

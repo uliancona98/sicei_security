@@ -49,9 +49,7 @@ public class JwtTokenUtil implements Serializable {
 	//check if the token has expired
 	private Boolean isTokenExpired(DecodedToken token) {
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("SSS");
-			Date date = new Date(Long.parseLong(token.ext));
-			System.out.println(date.toString());
+			Date date = new Date(Long.parseLong(token.expiracion));
 			return date.before(new Date());
 			
 		}
@@ -64,7 +62,7 @@ public class JwtTokenUtil implements Serializable {
 	//generate token for user
 	public String generateToken(Usuario usuario) {
 		Map<String, Object> claims = new HashMap<>();
-		claims.put("ext", ZonedDateTime.now().toInstant().toEpochMilli() + JWT_TOKEN_VALIDITY);
+		claims.put("expiracion", ZonedDateTime.now().toInstant().toEpochMilli() + JWT_TOKEN_VALIDITY);
 		return doGenerateToken(claims, usuario.getUsuario(), usuario.getSecret());
 	}
 
@@ -74,7 +72,6 @@ public class JwtTokenUtil implements Serializable {
 	//3. According to JWS Compact Serialization(https://tools.ietf.org/html/draft-ietf-jose-json-web-signature-41#section-3.1)
 	//   compaction of the JWT to a URL-safe string 
 	private String doGenerateToken(Map<String, Object> claims, String subject, String secret) {
-		System.out.println(new Date(ZonedDateTime.now().toInstant().toEpochMilli()).toString());
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(ZonedDateTime.now().toInstant().toEpochMilli()))
 				.setExpiration(new Date(ZonedDateTime.now().toInstant().toEpochMilli() + JWT_TOKEN_VALIDITY))
 				.signWith(SignatureAlgorithm.HS512, secret).compact();
