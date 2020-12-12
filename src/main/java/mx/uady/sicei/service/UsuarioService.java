@@ -12,6 +12,8 @@ import mx.uady.sicei.model.Usuario;
 import mx.uady.sicei.model.request.UsuarioRequest;
 import mx.uady.sicei.repository.UsuarioRepository;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+
 @Service
 public class UsuarioService {
 
@@ -38,8 +40,8 @@ public class UsuarioService {
         throw new NotFoundException();
     }
 
-    public Usuario getUsuario(String username) {
-        return usuarioRepository.findByUsuario(username);
+    public Usuario getUsuario(String usuario) {
+        return usuarioRepository.findByUsuario(usuario);
     }
 
     public Usuario editarUsuario(Integer id, UsuarioRequest request) {
@@ -50,5 +52,4 @@ public class UsuarioService {
         })
         .orElseThrow(() -> new NotFoundException("No existe ese usuario"));
     }
-
 }

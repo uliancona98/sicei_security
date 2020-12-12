@@ -16,6 +16,7 @@ import mx.uady.sicei.model.request.UsuarioRequest;
 import mx.uady.sicei.service.UsuarioService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/api")

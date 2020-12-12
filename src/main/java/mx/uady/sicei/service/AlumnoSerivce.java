@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 import java.util.UUID;
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.Usuario;
-
+import mx.uady.sicei.config.JwtTokenUtil;
 import mx.uady.sicei.model.request.AlumnoRequest;
 import mx.uady.sicei.model.Tutoria;
 import mx.uady.sicei.model.Equipo;
@@ -33,6 +33,8 @@ public class AlumnoSerivce {
     private TutoriaRepository tutoriaRepository;
     @Autowired
     private EquipoRepository equipoRepository;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
     public List<Alumno> obtenerAlumnos() {
 
         List<Alumno> alumnos = new LinkedList<>();
@@ -42,14 +44,11 @@ public class AlumnoSerivce {
     }
 
     public Alumno crearAlumno(AlumnoRequest request) {
-        //Usuario usuarioExistente = usuarioRepository.findByUsuario(request.getUsuario());
+
         Usuario usuarioExistente = usuarioRepository.findByUsuario(request.getUsuario());
         Alumno alumno = new Alumno();
-        //List<Alumno> alumnosConEquipo = alumnoRepository.findByEquipoId(equipo.get());
-        /*if(alumnosConEquipo.size()>0){
-            return false;
-        }*/
-        if (usuarioExistente==null) {
+
+        if (usuarioExistente == null) {
             alumno.setNombre(request.getNombre());
             alumno.setLicenciatura(request.getLicenciatura());
             alumno.setUsuario(crearUsuario(request)); // Relacionar 2 entidades
@@ -65,16 +64,13 @@ public class AlumnoSerivce {
     @Transactional
     private Usuario crearUsuario(AlumnoRequest request) {
         Usuario usuario = new Usuario();
-        String uuid = UUID.randomUUID().toString();
-        usuario.setPassword(uuid);
 
-        String token = UUID.randomUUID().toString();
-        usuario.setToken(token);
+        String secret = UUID.randomUUID().toString();
+        usuario.setSecret(secret);
         usuario.setPassword(request.getPassword());
         usuario.setUsuario(request.getUsuario());
 
-        Usuario usuarioGuardado = usuarioRepository.save(usuario);
-        return usuarioGuardado;
+        return usuarioRepository.save(usuario);
     }
 
     public Alumno getAlumno(Integer id) {
@@ -100,10 +96,6 @@ public class AlumnoSerivce {
 
     public String borrarAlumno(Integer id) {
         Optional<Alumno> alumno = alumnoRepository.findById(id);
-        //List<Alumno> alumnosConEquipo = alumnoRepository.findByEquipoId(equipo.get());
-        /*if(alumnosConEquipo.size()>0){
-            return false;
-        }*/
         if (!alumno.isPresent()) {
             throw new NotFoundException("Alumno");
         }

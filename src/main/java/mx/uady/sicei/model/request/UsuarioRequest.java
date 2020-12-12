@@ -19,7 +19,7 @@ public class UsuarioRequest{
     private String password;
 
     @Size(min = 5, max = 50)
-    private String token;
+    private String secret;
 
     public UsuarioRequest(){
         
@@ -41,11 +41,11 @@ public class UsuarioRequest{
         return this.usuario;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 
-    public String getToken() {
-        return this.token;
+    public String getSecret() {
+        return this.secret;
     }
 }
