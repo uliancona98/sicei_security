@@ -8,7 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.uady.sicei.exception.NotFoundException;
+
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.UUID;
 import mx.uady.sicei.model.Alumno;
 import mx.uady.sicei.model.Usuario;
@@ -23,7 +28,7 @@ import mx.uady.sicei.repository.UsuarioRepository;
 import mx.uady.sicei.repository.EquipoRepository;
 
 @Service
-public class AlumnoSerivce {
+public class AlumnoService {
 
     @Autowired
     private AlumnoRepository alumnoRepository;
@@ -33,6 +38,9 @@ public class AlumnoSerivce {
     private TutoriaRepository tutoriaRepository;
     @Autowired
     private EquipoRepository equipoRepository;
+    @Autowired
+    private EmailService emailService;
+
     public List<Alumno> obtenerAlumnos() {
 
         List<Alumno> alumnos = new LinkedList<>();
@@ -64,12 +72,18 @@ public class AlumnoSerivce {
         Usuario usuario = new Usuario();
 
         String token = UUID.randomUUID().toString();
-        usuario.setToken(token);
+        usuario.setSecret(token);
         usuario.setPassword(request.getPassword());
         usuario.setUsuario(request.getUsuario());
+        usuario.setEmail(request.getEmail());
 
-        Usuario usuarioGuardado = usuarioRepository.save(usuario);
-        return usuarioGuardado;
+        try{
+            emailService.enviarCorreo(usuario.getEmail(), "Alumno creado","Alumno con nombre de usuario: " + usuario.getUsuario() + " creado.");
+        } catch (MessagingException e) {
+            System.err.println("Error enviando correo.");
+        }
+
+        return usuarioRepository.save(usuario);
     }
 
     public Alumno getAlumno(Integer id) {
@@ -84,30 +98,44 @@ public class AlumnoSerivce {
             alumno.setNombre(request.getNombre());
             alumno.setLicenciatura(request.getLicenciatura());
 
-            Equipo equipo = equipoRepository.findById(request.getEquipoId()).get();
-            equipoRepository.save(equipo);
-            alumno.setEquipo(equipo);
+            Optional<Equipo> equipo = equipoRepository.findById(request.getEquipoId());
+            if(equipo.isPresent()) {
+                equipoRepository.save(equipo.get());
+                alumno.setEquipo(equipo.get());
+            }
+            String email = alumno.getUsuario().getEmail();
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                emailService.enviarCorreo(email, "Alumno editado", objectMapper.writeValueAsString(alumno));
+            } catch (Exception e) {
+                System.err.println("Error al enviar correo.");
+            }
 
             return alumnoRepository.save(alumno);
         })
-        .orElseThrow(() -> new NotFoundException("No existe este alumno :v"));
+        .orElseThrow(() -> new NotFoundException("No existe este alumno"));
     }
 
     public String borrarAlumno(Integer id) {
         Optional<Alumno> alumno = alumnoRepository.findById(id);
-        //List<Alumno> alumnosConEquipo = alumnoRepository.findByEquipoId(equipo.get());
-        /*if(alumnosConEquipo.size()>0){
-            return false;
-        }*/
         if (!alumno.isPresent()) {
             throw new NotFoundException("Alumno");
         }
         List<Tutoria> tutorias = tutoriaRepository.findByAlumnoId(id);
 
         if(tutorias.isEmpty()){
+            String email = alumno.get().getUsuario().getEmail();
+            String nombreAlumno = alumno.get().getNombre();
             alumnoRepository.deleteById(id);
             usuarioRepository.deleteById(id);
+
+            try{
+                emailService.enviarCorreo(email, "Eliminacion correcta", "Alumno " + nombreAlumno +" eliminado.");
+            } catch (MessagingException e) {
+                System.err.println("Error enviando correo.");
+            }
             return "Alumno Borrado";
+
         } else {
             return "Alumno "+id+" No se pudo borrar ya que tiene tutorias asignadas";
         }

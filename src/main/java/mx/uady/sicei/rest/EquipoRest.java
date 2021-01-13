@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,8 +48,7 @@ public class EquipoRest {
 
 
     @PutMapping("/equipos/{id}")
-    public ResponseEntity<Equipo> putEquipos(@PathVariable Integer id, @RequestBody EquipoRequest request)
-            throws URISyntaxException {
+    public ResponseEntity<Equipo> putEquipos(@PathVariable Integer id, @RequestBody EquipoRequest request) {
 
         Equipo equipo = equipoService.editarEquipos(id, request);
 
@@ -66,9 +64,9 @@ public class EquipoRest {
     }
 
       @DeleteMapping("/equipos/{id}")
-    public ResponseEntity deleteEquipo(@PathVariable Integer id){
+    public ResponseEntity<String> deleteEquipo(@PathVariable Integer id){
         
-        if(equipoService.borrarEquipo(id)==true){
+        if(equipoService.borrarEquipo(id)){
             return ResponseEntity
             .ok()
             .body("Equipo Borrado");

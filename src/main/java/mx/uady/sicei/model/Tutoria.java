@@ -1,26 +1,15 @@
 package mx.uady.sicei.model;
 
-import java.util.List;
 import java.io.Serializable;
 
-import javax.persistence.Embedded;
-import javax.persistence.Id;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "tutorias")
@@ -51,7 +40,9 @@ public class Tutoria {
         @Column(name = "id_profesor", insertable=false, updatable=false)
         private Integer profesorId;
 
-        public TutoriaId() { }
+        public TutoriaId() {
+            //empty
+         }
 
         /**
          * @return the alumnoId
@@ -77,6 +68,7 @@ public class Tutoria {
     }
 
     public Tutoria() {
+        //empty
     }
 
     public void setHoras(Integer horas) {

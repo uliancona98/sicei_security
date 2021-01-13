@@ -3,7 +3,6 @@ package mx.uady.sicei.model.request;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import mx.uady.sicei.model.Licenciatura;
 
 public class EquipoRequest {
 

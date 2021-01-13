@@ -3,6 +3,7 @@ package mx.uady.sicei.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -10,7 +11,6 @@ import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import mx.uady.sicei.exception.NotFoundException;
 import mx.uady.sicei.model.Profesor;
-import mx.uady.sicei.model.Licenciatura;
 import mx.uady.sicei.model.request.ProfesorRequest;
 import mx.uady.sicei.service.ProfesorService;
 
@@ -79,7 +77,7 @@ public class ProfesorRest {
 
     // Validar que exista, si no existe Lanzar un RuntimeException
     @DeleteMapping("/profesores/{id}")
-    public ResponseEntity deleteProfesor(@PathVariable Integer id){
+    public ResponseEntity<Map<String, String>> deleteProfesor(@PathVariable Integer id){
 
         String response = profesorService.borrarProfesor(id);
 
