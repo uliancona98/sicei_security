@@ -27,7 +27,7 @@ public class LoginService {
         }
 
         String token = UUID.randomUUID().toString();
-        usuario.setToken(token);
+        usuario.setSecret(token);
         usuarioRepository.save(usuario);
 
         return token;

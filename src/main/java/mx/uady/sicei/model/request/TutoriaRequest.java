@@ -1,9 +1,7 @@
   
 package mx.uady.sicei.model.request;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
@@ -21,7 +19,7 @@ public class TutoriaRequest {
     private Integer profesorId;
 
     public TutoriaRequest() {
-
+        //empty
     }
 
     public Integer getHoras() {

@@ -1,15 +1,10 @@
 package mx.uady.sicei.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,9 +17,6 @@ public class Equipo {
 
     @Column
     public String modelo;
-
-    /*@OneToMany(mappedBy = "equipo")
-    List<Alumno> alumnos;*/
 
     public Equipo() {
     }
@@ -59,15 +51,6 @@ public class Equipo {
         this.modelo = modelo;
         return this;
     }
-
-    /*public List<Alumno> getAlumnos() {
-        return alumnos;
-    }*/
-
-    /*public void setAlumnos(List<Alumno> alumnos) {
-        this.alumnos = alumnos;
-    }*/
-
     
     @Override
     public String toString() {

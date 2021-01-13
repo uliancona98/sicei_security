@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,7 +65,7 @@ public class TutoriaRest {
     }
 
     @DeleteMapping("/tutorias/{alumnoId}/{profesorId}")
-    public ResponseEntity deleteTutoria(@PathVariable Integer alumnoId, @PathVariable Integer profesorId){
+    public ResponseEntity<String> deleteTutoria(@PathVariable Integer alumnoId, @PathVariable Integer profesorId){
 
         tutoriaService.borrarTutoria(alumnoId, profesorId);
 

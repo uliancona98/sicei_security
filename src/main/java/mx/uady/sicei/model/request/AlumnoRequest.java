@@ -23,6 +23,10 @@ public class AlumnoRequest{
     private String password;
 
     @NotNull
+    @NotEmpty
+    private String email;
+
+    @NotNull
     private Licenciatura licenciatura;
 
     private Integer equipoId;
@@ -77,6 +81,10 @@ public class AlumnoRequest{
 
     public void setLicenciatura(Licenciatura licenciatura) {
         this.licenciatura = licenciatura;
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 
     public AlumnoRequest nombre(String nombre) {
