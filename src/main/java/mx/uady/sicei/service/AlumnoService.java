@@ -58,6 +58,7 @@ public class AlumnoService {
             alumno.setNombre(request.getNombre());
             alumno.setLicenciatura(request.getLicenciatura());
             alumno.setUsuario(crearUsuario(request)); // Relacionar 2 entidades
+
             Equipo equipo = equipoRepository.findById(request.getEquipoId()).get();
             equipoRepository.save(equipo);
             alumno.setEquipo(equipo);
@@ -75,10 +76,16 @@ public class AlumnoService {
         usuario.setSecret(token);
         usuario.setPassword(request.getPassword());
         usuario.setUsuario(request.getUsuario());
-        usuario.setEmail(request.getEmail());
 
         try{
-            emailService.enviarCorreo(usuario.getEmail(), "Alumno creado","Alumno con nombre de usuario: " + usuario.getUsuario() + " creado.");
+            if(emailService.emailValidator(request.getEmail())){
+                usuario.setEmail(request.getEmail());
+                emailService.enviarCorreo(usuario.getEmail(), "Alumno creado","Alumno con nombre de usuario: " + usuario.getUsuario() + " creado.");
+
+            }else{
+                System.err.println("El correo no cumple con el formato correcto");
+
+            }
         } catch (MessagingException e) {
             System.err.println("Error enviando correo.");
         }
@@ -95,18 +102,29 @@ public class AlumnoService {
     public Alumno editarAlumno(Integer id, AlumnoRequest request) {
         return alumnoRepository.findById(id)
         .map(alumno -> {
-            alumno.setNombre(request.getNombre());
-            alumno.setLicenciatura(request.getLicenciatura());
+            String respuesta = "";
+            if(request.getNombre()!=null){
+                respuesta = respuesta+"Nombre: "+ alumno.getNombre()+" => "+request.getNombre()+"\r\n";
+                alumno.setNombre(request.getNombre());
 
-            Optional<Equipo> equipo = equipoRepository.findById(request.getEquipoId());
-            if(equipo.isPresent()) {
-                equipoRepository.save(equipo.get());
-                alumno.setEquipo(equipo.get());
             }
+            if(request.getLicenciatura()!=null){
+                respuesta = respuesta+"Licenciatura: "+ alumno.getLicenciatura()+" => "+request.getLicenciatura()+"\r\n";
+                alumno.setLicenciatura(request.getLicenciatura());
+            }
+            if(request.getEquipoId()!=null){
+                Optional<Equipo> equipo = equipoRepository.findById(request.getEquipoId());
+                if(equipo.isPresent()) {
+                    equipoRepository.save(equipo.get());
+                    respuesta = respuesta+"Equipo: "+alumno.getEquipo().getId()+" => "+request.getEquipoId()+"\n";
+                    alumno.setEquipo(equipo.get());
+                }
+            }
+
             String email = alumno.getUsuario().getEmail();
             ObjectMapper objectMapper = new ObjectMapper();
             try {
-                emailService.enviarCorreo(email, "Alumno editado", objectMapper.writeValueAsString(alumno));
+                emailService.enviarCorreo(email, "Alumno editado", respuesta);
             } catch (Exception e) {
                 System.err.println("Error al enviar correo.");
             }
